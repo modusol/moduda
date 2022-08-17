@@ -10,9 +10,9 @@
         lg="4"
       >
         <base-material-chart-card
-          :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
+          :data="partRegChart.data"
+          :options="partRegChart.options"
+          :responsive-options="partRegChart.responsiveOptions"
           color="#E91E63"
           hover-reveal
           type="Bar"
@@ -54,11 +54,11 @@
           </template>
 
           <h4 class="card-title font-weight-light mt-2 ml-2">
-            Website Views
+            부품 등록 현황
           </h4>
 
           <p class="d-inline-flex font-weight-light ml-2 mt-1">
-            Last Campaign Performance
+            월별 표준, 비표준 등록 건수
           </p>
 
           <template v-slot:actions>
@@ -68,7 +68,7 @@
             >
               mdi-clock-outline
             </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
+            <span class="text-caption grey--text font-weight-light">updated 10 minutes ago</span>
           </template>
         </base-material-chart-card>
       </v-col>
@@ -142,7 +142,7 @@
             >
               mdi-clock-outline
             </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
+            <span class="text-caption grey--text font-weight-light">updated 4 minutes ago</span>
           </template>
         </base-material-chart-card>
       </v-col>
@@ -209,7 +209,7 @@
             >
               mdi-clock-outline
             </v-icon>
-            <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
+            <span class="text-caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
           </template>
         </base-material-chart-card>
       </v-col>
@@ -284,11 +284,11 @@
           class="px-5 py-3"
         >
           <template v-slot:heading>
-            <div class="display-2 font-weight-light">
+            <div class="text-h3 font-weight-light">
               Employees Stats
             </div>
 
-            <div class="subtitle-1 font-weight-light">
+            <div class="text-subtitle-1 font-weight-light">
               New employees on 15th September, 2016
             </div>
           </template>
@@ -440,26 +440,36 @@
             },
           },
         },
-        emailsSubscriptionChart: {
+        partRegChart: {
           data: {
             labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
             series: [
-              [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895],
-
+              {
+                name: 'Standard',
+                data: [102, 121, 120, 153, 161, 170, 172, 98, 102, 131, 128, 99],
+              },
+              {
+                name: 'Non Standard',
+                data: [51, 44, 32, 78, 55, 45, 32, 34, 68, 10, 56, 95],
+              },
             ],
           },
           options: {
+            stackBars: true,
             axisX: {
               showGrid: false,
             },
             low: 0,
-            high: 1000,
+            high: 300,
             chartPadding: {
               top: 0,
-              right: 5,
+              right: 1,
               bottom: 0,
               left: 0,
             },
+            plugins: [
+              this.$chartist.plugins.legend(),
+            ],
           },
           responsiveOptions: [
             ['screen and (max-width: 640px)', {

@@ -14,12 +14,12 @@
       small
       @click="setDrawer(!drawer)"
     >
-      <v-icon v-if="value">
-        mdi-view-quilt
+      <v-icon v-if="drawer">
+        mdi-chevron-left
       </v-icon>
 
       <v-icon v-else>
-        mdi-dots-vertical
+        mdi-chevron-right
       </v-icon>
     </v-btn>
 
