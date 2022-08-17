@@ -6,7 +6,7 @@
     :expand-on-hover="expandOnHover"
     :right="$vuetify.rtl"
     :src="barImage"
-    mobile-break-point="960"
+    mobile-breakpoint="960"
     app
     width="260"
     v-bind="$attrs"
@@ -31,14 +31,14 @@
           contain
         >
           <v-img
-            src="https://demos.creative-tim.com/vuetify-material-dashboard/favicon.ico"
+            src="../../../../assets/logo.png"
             max-height="30"
           />
         </v-list-item-avatar>
 
         <v-list-item-content>
           <v-list-item-title
-            class="text-h4"
+            class="text-title"
             v-text="profile.title"
           />
         </v-list-item-content>

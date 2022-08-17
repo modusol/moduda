@@ -13,6 +13,7 @@
           :data="partRegChart.data"
           :options="partRegChart.options"
           :responsive-options="partRegChart.responsiveOptions"
+          :color-type="'red'"
           color="#E91E63"
           hover-reveal
           type="Bar"
@@ -80,6 +81,7 @@
         <base-material-chart-card
           :data="dailySalesChart.data"
           :options="dailySalesChart.options"
+          :color-type="'green'"
           color="success"
           hover-reveal
           type="Line"
@@ -154,6 +156,7 @@
         <base-material-chart-card
           :data="dataCompletedTasksChart.data"
           :options="dataCompletedTasksChart.options"
+          :color-type="'blue'"
           hover-reveal
           color="info"
           type="Line"

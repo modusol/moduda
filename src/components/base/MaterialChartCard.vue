@@ -1,6 +1,6 @@
 <template>
   <base-material-card
-    class="v-card--material-chart"
+    :class="'v-card--material-chart-'+ colorType"
     v-bind="$attrs"
     v-on="$listeners"
   >
@@ -62,12 +62,31 @@
         required: true,
         validator: v => ['Bar', 'Line', 'Pie'].includes(v),
       },
+      colorType: {
+        type: String,
+        default: 'white',
+      },
     },
   }
 </script>
 
 <style lang="sass">
-  .v-card--material-chart
+  @mixin mx-chart-series($sn, $r, $g, $b)
+    .ct-series-#{$sn} .ct-point,
+    .ct-series-#{$sn} .ct-line,
+    .ct-series-#{$sn} .ct-bar,
+    .ct-series-#{$sn} .ct-slice-donut
+        stroke: rgba($r, $g, $b,1)
+
+    .ct-series-#{$sn} .ct-slice-pie,
+    .ct-series-#{$sn} .ct-area
+        fill: rgba($r, $g, $b,.4)
+
+  @mixin mx-chart-legend($si, $r, $g, $b)
+      .ct-series-#{$si}:before
+          background-color: rgba($r, $g, $b,1)
+
+  @mixin material-chart($color)
     p
       color: #999
 
@@ -76,27 +95,26 @@
 
       .ct-label
         color: inherit
-        opacity: .7
+        opacity: .9
         font-size: 0.975rem
         font-weight: 100
 
       .ct-grid
-        stroke: rgba(255, 255, 255, 0.2)
+        stroke: rgba(255,255,255,0.5)
 
-      .ct-series-a .ct-point,
-      .ct-series-a .ct-line,
-      .ct-series-a .ct-bar,
-      .ct-series-a .ct-slice-donut
-          stroke: rgba(255,255,255,.8)
-
-      .ct-series-a .ct-slice-pie,
-      .ct-series-a .ct-area
-          fill: rgba(255,255,255,.4)
+      @include mx-chart-series(a, 255, 255, 255)
+      @if($color == red)
+        @include mx-chart-series(b, 162, 221, 204)
+        @include mx-chart-series(c, 162, 162, 221)
+      @else if($color == green)
+        @include mx-chart-series(b, 100, 91, 79)
+      @else if($color == blue)
+        @include mx-chart-series(b, 100, 91, 79)
 
     .ct-legend
       position: relative
       z-index: 10
-      top: -15px
+      top: -18px
       text-align: center
       li
         position: relative
@@ -119,9 +137,22 @@
         position: absolute
         top: 0
         right: 0
-
       .ct-series-0:before
-          background-color: rgba(255,255,255,0.8)
-      .ct-series-1:before
-          background-color: rgba(240,91,79,0.8)
+          background-color: rgba(255,255,255,01)
+      @if($color == red)
+        @include mx-chart-legend(1, 162, 221, 204)
+        @include mx-chart-legend(2, 162, 162, 221)
+      @else if($color == green)
+        @include mx-chart-legend(1, 100, 91, 79)
+      @else if($color == blue)
+        @include mx-chart-legend(1, 100, 91, 79)
+
+  .v-card--material-chart
+    &-red
+      @include material-chart(red)
+    &-green
+      @include material-chart(green)
+    &-blue
+      @include material-chart(blue)
+
 </style>
