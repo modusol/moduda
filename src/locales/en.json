@@ -44,5 +44,6 @@
   "wizard": "Wizard",
   "unit" : "Unit",
   "part" : "Part",
-  "design" : "Design"
+  "design" : "Design",
+  "bom" : "BOM"
 }

@@ -16,9 +16,14 @@
 
       <v-sheet
         v-else
-        :class="{
-          'pa-7': !$slots.image
-        }"
+        :class="[
+          {
+            'pa-7': !$slots.image && !thin
+          },
+          {
+            'pa-5' : thin
+          }
+        ]"
         :color="color"
         :max-height="icon ? 90 : undefined"
         :width="icon ? 'auto' : '100%'"
@@ -114,6 +119,11 @@
       title: {
         type: String,
         default: '',
+      },
+      /* Header(v-sheet) 부분의 높이를 낮추기 위한 옵션 */
+      thin: {
+        type: Boolean,
+        default: false,
       },
     },
 

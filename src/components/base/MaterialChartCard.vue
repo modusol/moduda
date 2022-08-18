@@ -106,10 +106,15 @@
       @if($color == red)
         @include mx-chart-series(b, 162, 221, 204)
         @include mx-chart-series(c, 162, 162, 221)
+        @include mx-chart-series(d, 221, 221, 162)
       @else if($color == green)
-        @include mx-chart-series(b, 100, 91, 79)
+        @include mx-chart-series(b, 162, 221, 204)
+        @include mx-chart-series(c, 162, 162, 221)
+        @include mx-chart-series(d, 221, 221, 162)
       @else if($color == blue)
-        @include mx-chart-series(b, 100, 91, 79)
+        @include mx-chart-series(b, 162, 221, 204)
+        @include mx-chart-series(c, 162, 162, 221)
+        @include mx-chart-series(d, 221, 221, 162)
 
     .ct-legend
       position: relative
@@ -142,10 +147,15 @@
       @if($color == red)
         @include mx-chart-legend(1, 162, 221, 204)
         @include mx-chart-legend(2, 162, 162, 221)
+        @include mx-chart-legend(3, 221, 221, 162)
       @else if($color == green)
-        @include mx-chart-legend(1, 100, 91, 79)
+        @include mx-chart-legend(1, 162, 221, 204)
+        @include mx-chart-legend(2, 162, 162, 221)
+        @include mx-chart-legend(3, 221, 221, 162)
       @else if($color == blue)
-        @include mx-chart-legend(1, 100, 91, 79)
+        @include mx-chart-legend(1, 162, 221, 204)
+        @include mx-chart-legend(2, 162, 162, 221)
+        @include mx-chart-legend(3, 221, 221, 162)
 
   .v-card--material-chart
     &-red
