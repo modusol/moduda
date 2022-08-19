@@ -7,6 +7,8 @@
     <dashboard-core-view />
 
     <dashboard-core-settings />
+
+    <dashboard-core-notifications />
   </v-app>
 </template>
 
@@ -18,6 +20,7 @@
       DashboardCoreAppBar: () => import('./components/core/AppBar'),
       DashboardCoreDrawer: () => import('./components/core/Drawer'),
       DashboardCoreSettings: () => import('./components/core/Settings'),
+      DashboardCoreNotifications: () => import('./components/core/Notifications'),
       DashboardCoreView: () => import('./components/core/View'),
     },
 

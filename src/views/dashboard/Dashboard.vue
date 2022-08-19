@@ -11,7 +11,6 @@
       >
         <base-material-card
           color="primary"
-          class="px-5 py-3"
           thin
         >
           <template v-slot:heading>
@@ -19,35 +18,32 @@
               Notify
             </div>
           </template>
-          <v-card-text>
-            <v-list two-line>
-              <v-list-item-group
-                active-class=""
-              >
-                <template v-for="(item, index) in notify.items">
-                  <v-list-item :key="item.title">
-                    <template>
-                      <v-list-item-content>
-                        <v-list-item-title v-text="item.title" />
-                        <v-list-item-subtitle
-                          class="text--primary"
-                          v-text="item.headline"
-                        />
-                        <v-list-item-subtitle v-text="item.subtitle" />
-                      </v-list-item-content>
-                      <v-list-item-action>
-                        <v-list-item-action-text v-text="item.action" />
-                      </v-list-item-action>
-                    </template>
-                  </v-list-item>
-                  <v-divider
-                    v-if="index < notify.items.length - 1"
-                    :key="index"
-                  />
-                </template>
-              </v-list-item-group>
-            </v-list>
-          </v-card-text>
+          <v-list
+            dense
+          >
+            <v-list-item-group
+              active-class=""
+            >
+              <template v-for="(item, index) in notify.items">
+                <v-list-item
+                  :key="item.title"
+                >
+                  <template>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.title" />
+                    </v-list-item-content>
+                    <v-list-item-action>
+                      <v-list-item-action-text v-text="item.action" />
+                    </v-list-item-action>
+                  </template>
+                </v-list-item>
+                <v-divider
+                  v-if="index < notify.items.length - 1"
+                  :key="index"
+                />
+              </template>
+            </v-list-item-group>
+          </v-list>
         </base-material-card>
       </v-col>
       <v-col
@@ -56,43 +52,49 @@
       >
         <base-material-card
           color="primary"
-          class="px-5 py-3"
           thin
         >
           <template v-slot:heading>
             <div class="text-h3 font-weight-light">
-              Notify
+              Q & A
             </div>
           </template>
-          <v-card-text>
-            <v-list two-line>
-              <v-list-item-group
-                active-class=""
-              >
-                <template v-for="(item, index) in notify.items">
-                  <v-list-item :key="item.title">
-                    <template>
-                      <v-list-item-content>
-                        <v-list-item-title v-text="item.title" />
-                        <v-list-item-subtitle
-                          class="text--primary"
-                          v-text="item.headline"
-                        />
-                        <v-list-item-subtitle v-text="item.subtitle" />
-                      </v-list-item-content>
-                      <v-list-item-action>
-                        <v-list-item-action-text v-text="item.action" />
-                      </v-list-item-action>
-                    </template>
-                  </v-list-item>
-                  <v-divider
-                    v-if="index < notify.items.length - 1"
-                    :key="index"
-                  />
-                </template>
-              </v-list-item-group>
-            </v-list>
-          </v-card-text>
+          <v-list
+            two-line
+            dense
+          >
+            <v-list-item-group
+              active-class=""
+            >
+              <template v-for="(item, index) in qa.items">
+                <v-list-item :key="item.title">
+                  <template>
+                    <v-list-item-content>
+                      <v-list-item-title
+                        class="txt_line"
+                        v-text="item.title"
+                      />
+                      <v-list-item-subtitle
+                        class="txt_line v-list-reply-text"
+                        v-text="item.reply"
+                      />
+                    </v-list-item-content>
+                    <v-list-item-action>
+                      <v-list-item-action-text v-text="item.action" />
+                      <v-list-item-action-text
+                        class="v-list-reply-text"
+                        v-text="item.replyAction"
+                      />
+                    </v-list-item-action>
+                  </template>
+                </v-list-item>
+                <v-divider
+                  v-if="index < qa.items.length - 1"
+                  :key="index"
+                />
+              </template>
+            </v-list-item-group>
+          </v-list>
         </base-material-card>
       </v-col>
     </v-row>
@@ -307,8 +309,7 @@
       >
         <base-material-card
           color="primary"
-          class="px-5 py-3"
-          thin="true"
+          thin
         >
           <template v-slot:heading>
             <v-tabs
@@ -349,22 +350,25 @@
               v-for="n in 3"
               :key="n"
             >
-              <v-card-text>
-                <v-col cols="12">
-                  <v-row v-if="tabs != 0">
-                    <v-col cols="12">
-                      <v-data-table
-                        :headers="headers[tabs]"
-                        :items="tasks[tabs]"
-                        :options="{itemsPerPage: 5}"
-                      />
-                    </v-col>
-                  </v-row>
-                  <v-row v-else>
-                    <v-col cols="12">
-                      <v-list
-                        three-line
-                        dense
+              <v-col cols="12">
+                <v-row v-if="tabs != 0">
+                  <v-col cols="12">
+                    <v-data-table
+                      :headers="headers[tabs]"
+                      :items="tasks[tabs]"
+                      :options="{itemsPerPage: 5}"
+                    />
+                  </v-col>
+                </v-row>
+                <v-row v-else>
+                  <v-col cols="12">
+                    <v-list
+                      two-line
+                      dense
+                      flat
+                    >
+                      <v-list-item-group
+                        active-class=""
                       >
                         <template v-for="(item, index) in tasks[tabs]">
                           <v-subheader
@@ -382,9 +386,7 @@
                             :key="item.title"
                           >
                             <v-list-item-avatar>
-                              <v-avatar :color="item.color">
-                                <span class="white--text text-h5">{{ item.avatar }}</span>
-                              </v-avatar>
+                              <v-img :src="item.avatar" />
                             </v-list-item-avatar>
                             <v-list-item-content>
                               <v-list-item-title v-html="item.title" />
@@ -392,11 +394,11 @@
                             </v-list-item-content>
                           </v-list-item>
                         </template>
-                      </v-list>
-                    </v-col>
-                  </v-row>
-                </v-col>
-              </v-card-text>
+                      </v-list-item-group>
+                    </v-list>
+                  </v-col>
+                </v-row>
+              </v-col>
             </v-tab-item>
           </v-tabs-items>
         </base-material-card>
@@ -407,7 +409,7 @@
 
 <script>
   export default {
-    name: 'DashboardDashboard',
+    name: 'Dashboard',
 
     data () {
       return {
@@ -415,33 +417,45 @@
           items: [
             {
               action: '15 min',
-              headline: 'Brunch this weekend?',
-              subtitle: 'I`ll be in your neighborhood doing errands this weekend. Do you want to hang out?',
-              title: 'Ali Connors',
+              title: 'BOM 사용자용/관리자용 Manual',
             },
             {
               action: '2 hr',
-              headline: 'Summer BBQ',
-              subtitle: 'Wish I could come, but I`m out of town this weekend.',
-              title: 'me, Scrott, Jennifer',
+              title: 'Design 사용자용/관리자용 Manual',
             },
             {
               action: '6 hr',
-              headline: 'Oui oui',
-              subtitle: 'Do you have Paris recommendations? Have you ever been?',
-              title: 'Sandra Adams',
+              title: 'Part 사용자용/관리자용 Manual',
             },
             {
               action: '12 hr',
-              headline: 'Birthday gift',
-              subtitle: 'Have any ideas about what we should get Heidi for her birthday?',
-              title: 'Trevor Hansen',
+              title: 'Unit 사용자용/관리자용 Manual',
             },
             {
               action: '18hr',
-              headline: 'Recipe to try',
-              subtitle: 'We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-              title: 'Britta Holt',
+              title: 'System 정기점검 공지(2022-08-21)',
+            },
+          ],
+        },
+        qa: {
+          items: [
+            {
+              action: '30 min',
+              title: 'Dashboard에서 Widget을 변경하려면 어떻게 해야 하나요?',
+              reply: 'ㄴ우측 상단에 Profile 아이콘 클릭 후, Widget 설정으로 이동 하면, 원하는 Widget을 사이즈별로 설정할 수 있습니다.',
+              replyAction: '12 min',
+            },
+            {
+              action: '12 hr',
+              title: 'Unit에 새로운 Template을 등록 하고 싶습니다.',
+              reply: 'ㄴUnit > 관리 > Template 관리로 메뉴 이동 후, 새로운 Template 등록 후 원하는 Task등을 삽입하여 저장 하면 새로운 Template으로 진행할 수 있습니다.',
+              replyAction: '10 hr',
+            },
+            {
+              action: '3 day',
+              title: 'BOM에 새로운 파생 모델을 생성하고 싶습니다.',
+              reply: '',
+              replyAction: '',
             },
           ],
         },
@@ -638,7 +652,7 @@
           0: [
             { header: 'QXST101101' },
             {
-              avatar: 'HD',
+              avatar: require('@/assets/avatar/male_man_person.svg'),
               color: 'red',
               title: '신뢰성평가',
               subtitle: '<span class="text--primary">정호동</span> &mdash; 회로 신뢰성평가를 위한 산출물 등록 부탁드립니다.',
@@ -646,14 +660,14 @@
             { divider: true, inset: true },
             { header: 'ATM101101' },
             {
-              avatar: 'KD',
+              avatar: require('@/assets/avatar/office_man_person.svg'),
               color: 'blue',
               title: 'PCB 제작 <span class="grey--text text--lighten-1">4</span>',
               subtitle: '<span class="text--primary">홍길동</span> &mdash; PCB 제작 요청서 등록했습니다.',
             },
             { divider: true, inset: true },
             {
-              avatar: 'JD',
+              avatar: require('@/assets/avatar/man_old_avatar_person.svg'),
               color: 'black',
               title: '회로 DR',
               subtitle: '<span class="text--primary">박재덕</span> &mdash; 회의 참석 부탁드립니다.',

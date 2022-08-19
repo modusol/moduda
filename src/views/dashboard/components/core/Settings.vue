@@ -1,20 +1,5 @@
 <template>
   <div id="settings-wrapper">
-    <v-card
-      id="settings"
-      class="py-2 px-4"
-      color="rgba(0, 0, 0, .3)"
-      dark
-      flat
-      link
-      min-width="100"
-      style="position: fixed; top: 115px; right: -35px; border-radius: 8px;"
-    >
-      <v-icon large>
-        mdi-settings
-      </v-icon>
-    </v-card>
-
     <v-menu
       v-model="menu"
       :close-on-content-click="false"
@@ -23,7 +8,7 @@
       content-class="v-settings"
       left
       nudge-left="8"
-      offset-x
+      offset-y
       origin="top right"
       transition="scale-transition"
     >
@@ -126,59 +111,42 @@
             </v-item>
           </v-item-group>
 
-          <v-btn
-            block
-            class="mb-3"
-            color="success"
-            href="https://www.creative-tim.com/product/vuetify-material-dashboard"
-            default
-            rel="noopener"
-            target="_blank"
-          >
-            Free Download
-          </v-btn>
+          <strong class="mb-3 d-inline-block">AVATAR</strong>
 
-          <v-btn
-            block
-            class="mb-3"
-            color="grey darken-1"
-            dark
-            href="https://vuetifyjs.com/components/api-explorer"
-            default
-            rel="noopener"
-            target="_blank"
-          >
-            Documentation
-          </v-btn>
-
-          <div class="my-12" />
-
-          <div>
-            <strong class="mb-3 d-inline-block">THANK YOU FOR SHARING!</strong>
-          </div>
-
-          <v-btn
-            class="ma-1"
-            color="#55acee"
-            dark
-            default
-            rounded
-          >
-            <v-icon>mdi-twitter</v-icon>
-            - 45
-          </v-btn>
-
-          <v-btn
-            class="ma-1"
-            color="#3b5998"
-            dark
-            default
-            rounded
-          >
-            <v-icon>mdi-facebook</v-icon>
-            - 50
-          </v-btn>
+          <v-item-group v-model="avatar">
+            <v-item
+              v-for="avatar in avatars"
+              :key="avatar"
+              :value="avatar"
+            >
+              <template v-slot="{ active, toggle }">
+                <v-avatar
+                  :class="active && 'v-settings__item--active'"
+                  class="v-settings__item"
+                  @click="toggle"
+                >
+                  <v-img :src="avatar" />
+                </v-avatar>
+              </template>
+            </v-item>
+          </v-item-group>
         </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <v-btn
+            text
+            @click="menu = false"
+          >
+            Cancel
+          </v-btn>
+          <v-btn
+            color="primary"
+            text
+            @click="menu = false"
+          >
+            Save
+          </v-btn>
+        </v-card-actions>
       </v-card>
     </v-menu>
   </div>
@@ -195,7 +163,7 @@
     mixins: [Proxyable],
 
     data: () => ({
-      color: '#E91E63',
+      color: '#4CAF50',
       colors: [
         '#9C27b0',
         '#00CAE3',
@@ -204,12 +172,19 @@
         '#E91E63',
         '#FF5252',
       ],
-      image: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
+      image: require('@/assets/sidebar/sidebar-1.jpg'),
       images: [
-        'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
-        'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-2.jpg',
-        'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-3.jpg',
-        'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-4.jpg',
+        require('@/assets/sidebar/sidebar-1.jpg'),
+        require('@/assets/sidebar/sidebar-2.jpg'),
+        require('@/assets/sidebar/sidebar-3.jpg'),
+        require('@/assets/sidebar/sidebar-4.jpg'),
+      ],
+      avatar: require('@/assets/avatar/male_man_person.svg'),
+      avatars: [
+        require('@/assets/avatar/male_man_person.svg'),
+        require('@/assets/avatar/man_old_avatar_person.svg'),
+        require('@/assets/avatar/office_man_person.svg'),
+        require('@/assets/avatar/person_female_child.svg'),
       ],
       menu: false,
       saveImage: '',
@@ -238,11 +213,17 @@
       image (val) {
         this.setBarImage(val)
       },
+      avatar (val) {
+        this.setAvatarImage(val)
+      },
     },
 
     methods: {
       ...mapMutations({
         setBarImage: 'SET_BAR_IMAGE',
+      }),
+      ...mapMutations({
+        setAvatarImage: 'SET_AVATAR_IMAGE',
       }),
     },
   }

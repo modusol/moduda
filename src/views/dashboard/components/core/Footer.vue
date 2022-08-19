@@ -29,11 +29,7 @@
           md="auto"
         >
           <div class="text-body-1 font-weight-light pt-6 pt-md-0 text-center">
-            &copy; 2019, made with
-            <v-icon size="18">
-              mdi-heart
-            </v-icon>
-            by <a href="https://www.creative-tim.com">Creative Tim</a> for a better web.
+            &copy; <a href="https://kr.freepik.com/vectors/business">Business 벡터는 freepik - kr.freepik.com가 제작함</a>
           </div>
         </v-col>
       </v-row>

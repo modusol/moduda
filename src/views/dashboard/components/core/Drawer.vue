@@ -31,7 +31,8 @@
           contain
         >
           <v-img
-            src="../../../../assets/logo.png"
+            class="main-logo"
+            src="../../../../assets/logo.svg"
             max-height="30"
           />
         </v-list-item-avatar>
