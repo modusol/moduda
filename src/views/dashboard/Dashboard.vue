@@ -12,6 +12,7 @@
         <base-material-card
           color="primary"
           thin
+          height="285px"
         >
           <template v-slot:heading>
             <div class="text-h3 font-weight-light">
@@ -53,6 +54,7 @@
         <base-material-card
           color="primary"
           thin
+          height="285px"
         >
           <template v-slot:heading>
             <div class="text-h3 font-weight-light">
