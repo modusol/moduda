@@ -5,6 +5,7 @@
     :sub-group="subGroup"
     append-icon="mdi-menu-down"
     :color="barColor !== 'rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.7)' ? 'white' : 'grey darken-1'"
+    :style="level !== 0 ? 'padding-left:' + (30*level) + 'px' : ''"
   >
     <template v-slot:activator>
       <v-list-item-icon
@@ -23,22 +24,24 @@
       </v-list-item-avatar>
 
       <v-list-item-content>
-        <v-list-item-title v-text="item.title" />
+        <v-list-item-title
+          v-text="item.title"
+        />
       </v-list-item-content>
     </template>
-
     <template v-for="(child, i) in children">
       <base-item-sub-group
         v-if="child.children"
         :key="`sub-group-${i}`"
         :item="child"
+        :level="computedLevel"
       />
 
       <base-item
         v-else
         :key="`item-${i}`"
         :item="child"
-        text
+        :level="computedLevel"
       />
     </template>
   </v-list-group>
@@ -72,6 +75,10 @@
         type: Boolean,
         default: false,
       },
+      level: {
+        type: Number,
+        default: 0,
+      },
     },
 
     computed: {
@@ -95,6 +102,11 @@
       },
       group () {
         return this.genGroup(this.item.children)
+      },
+      computedLevel () {
+        let rtnLevel = 0
+        rtnLevel = this.level + 1
+        return rtnLevel
       },
     },
 

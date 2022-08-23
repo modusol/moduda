@@ -61,6 +61,7 @@
           v-if="item.children"
           :key="`group-${i}`"
           :item="item"
+          :level="0"
         >
           <!--  -->
         </base-item-group>
@@ -106,6 +107,17 @@
           title: 'unit',
           icon: 'mdi-layers-triple',
           to: '/pages/user',
+          group: 'unit',
+          // children: [
+          //   {
+          //     title: 'search',
+          //     to: '/search',
+          //   },
+          //   {
+          //     title: 'admin',
+          //     to: '/admin',
+          //   },
+          // ],
         },
         {
           title: 'part',
@@ -120,7 +132,7 @@
         {
           title: 'bom',
           icon: 'mdi-file-tree',
-          to: '/components/typography',
+          to: '/components/Notifications',
         },
       ],
     }),

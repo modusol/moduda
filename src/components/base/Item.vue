@@ -5,6 +5,7 @@
     :target="href && href !== '#' ? '_blank' : undefined"
     :to="item.to"
     :active-class="`primary ${!isDark ? 'black' : 'white'}--text`"
+    :style="`${level !== 0 ? 'padding-left:'+30*level+'px' : ''}`"
   >
     <v-list-item-icon
       v-if="text"
@@ -16,8 +17,12 @@
       <v-icon v-text="item.icon" />
     </v-list-item-icon>
 
-    <v-list-item-content v-if="item.title || item.subtitle">
-      <v-list-item-title v-text="item.title" />
+    <v-list-item-content
+      v-if="item.title || item.subtitle"
+    >
+      <v-list-item-title
+        v-text="item.title"
+      />
 
       <v-list-item-subtitle v-text="item.subtitle" />
     </v-list-item-content>
@@ -46,6 +51,10 @@
       text: {
         type: Boolean,
         default: false,
+      },
+      level: {
+        type: Number,
+        default: 0,
       },
     },
 
