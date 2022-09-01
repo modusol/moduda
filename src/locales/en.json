@@ -45,5 +45,7 @@
   "unit" : "Unit",
   "part" : "Part",
   "design" : "Design",
-  "bom" : "BOM"
+  "bom" : "BOM",
+  "admin" : "Management",
+  "myWork" : "Work To Do"
 }

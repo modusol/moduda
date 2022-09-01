@@ -6,6 +6,8 @@
     append-icon="mdi-menu-down"
     :color="barColor !== 'rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.7)' ? 'white' : 'grey darken-1'"
     :style="level !== 0 ? 'padding-left:' + (30*level) + 'px' : ''"
+    :value="this.$router.getRoutes == item.to ? 'true' : 'false'"
+    @click="clickGroup(item)"
   >
     <template v-slot:activator>
       <v-list-item-icon
@@ -29,6 +31,7 @@
         />
       </v-list-item-content>
     </template>
+
     <template v-for="(child, i) in children">
       <base-item-sub-group
         v-if="child.children"
@@ -124,6 +127,11 @@
 
             return group
           }).join('|')
+      },
+      clickGroup (item) {
+        if (item.children && item.to) {
+          this.$router.push(item.to)
+        }
       },
     },
   }

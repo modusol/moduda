@@ -56,6 +56,12 @@ export default new Router({
           path: 'upgrade',
           component: () => import('@/views/dashboard/Upgrade'),
         },
+         // UnitDashboard
+         {
+          name: 'Unit Dashboard',
+          path: 'unit/unit-dashboard',
+          component: () => import('@/views/unit/UnitDashboard'),
+        },
       ],
     },
   ],

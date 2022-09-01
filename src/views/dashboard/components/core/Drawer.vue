@@ -106,18 +106,21 @@
         {
           title: 'unit',
           icon: 'mdi-layers-triple',
-          to: '/pages/user',
-          group: 'unit',
-          // children: [
-          //   {
-          //     title: 'search',
-          //     to: '/search',
-          //   },
-          //   {
-          //     title: 'admin',
-          //     to: '/admin',
-          //   },
-          // ],
+          to: '/unit/unit-dashboard',
+          children: [
+            {
+              title: 'unitMyWork',
+              to: '/unit-my-work',
+            },
+            {
+              title: 'search',
+              to: '/unit-search',
+            },
+            {
+              title: 'admin',
+              to: '/unit-admin',
+            },
+          ],
         },
         {
           title: 'part',
