@@ -143,8 +143,8 @@
           <v-card-text>
             <pie-chart
               :data="milestone"
-              width="295"
-              height="295"
+              :width="290"
+              :height="290"
             />
           </v-card-text>
         </base-material-card>
@@ -433,7 +433,7 @@
             labels: ['PCA', 'DIA', 'PIA', 'DVR', 'PVR', 'PRA', 'SRA'],
             datasets: [
               {
-                backgroundColor: ['#BCAAA4', '#81D4FA', '#FFE082', '#C5E1A5', '#80DEEA', '#E6EE9C', '#B2EBF2'],
+                backgroundColor: ['#FF8A80', '#EA80FC', '#B388FF', '#CCFF90', '#FFD180', '#E6EE9C', '#FFFF8D'],
                 data: [3, 15, 20, 24, 27, 5, 6],
               },
             ],
@@ -457,214 +457,7 @@
           selectedOpen: false,
           events: [],
           colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1', 'red', 'green', 'blue'],
-          names: ['시험 성적서', '요구사항 명세', 'PCB 제작요청', '회로설계검증', '기구설계검증', '도면배포', '신뢰성 시험 의뢰', 'Sample 발주', '[회의]회로DR', '[회의]품평회 진행'],
-        },
-        headers: {
-          0: [
-          ],
-          1: [
-            {
-              sortable: true,
-              text: 'No',
-              value: 'id',
-              align: 'center',
-            },
-            {
-              sortable: true,
-              text: 'Part No',
-              value: 'partNo',
-              align: 'center',
-            },
-            {
-              sortable: true,
-              text: 'Desc.',
-              value: 'partDesc',
-              align: 'left',
-            },
-            {
-              sortable: true,
-              text: 'Spec.',
-              value: 'partSpec',
-              align: 'left',
-            },
-            {
-              sortable: true,
-              text: '상태',
-              value: 'status',
-              align: 'center',
-            },
-            {
-              sortable: true,
-              text: '작성일',
-              value: 'createDate',
-              align: 'center',
-            },
-          ],
-          2: [
-            {
-              sortable: true,
-              text: 'No',
-              value: 'id',
-              align: 'center',
-            },
-            {
-              sortable: true,
-              text: '제품군',
-              value: 'productType',
-              align: 'center',
-            },
-            {
-              sortable: true,
-              text: '제품명',
-              value: 'product',
-              align: 'left',
-            },
-            {
-              sortable: true,
-              text: 'Board Type',
-              value: 'boardType',
-              align: 'left',
-            },
-            {
-              sortable: true,
-              text: 'PBA No',
-              value: 'pbaNo',
-              align: 'center',
-            },
-            {
-              sortable: true,
-              text: 'PCB Code',
-              value: 'pcbNo',
-              align: 'center',
-            },
-            {
-              sortable: true,
-              text: '상태',
-              value: 'status',
-              align: 'center',
-            },
-          ],
-        },
-        tabs: 0,
-        tasks: {
-          0: [
-            { header: 'QXST101101' },
-            {
-              avatar: require('@/assets/avatar/male_man_person.svg'),
-              color: 'red',
-              title: '신뢰성평가',
-              subtitle: '<span class="text--primary">정호동</span> &mdash; 회로 신뢰성평가를 위한 산출물 등록 부탁드립니다.',
-            },
-            { divider: true, inset: true },
-            { header: 'ATM101101' },
-            {
-              avatar: require('@/assets/avatar/office_man_person.svg'),
-              color: 'blue',
-              title: 'PCB 제작 <span class="grey--text text--lighten-1">4</span>',
-              subtitle: '<span class="text--primary">홍길동</span> &mdash; PCB 제작 요청서 등록했습니다.',
-            },
-            { divider: true, inset: true },
-            {
-              avatar: require('@/assets/avatar/man_old_avatar_person.svg'),
-              color: 'black',
-              title: '회로 DR',
-              subtitle: '<span class="text--primary">박재덕</span> &mdash; 회의 참석 부탁드립니다.',
-            },
-          ],
-          1: [
-            {
-              id: 1,
-              partNo: 'RC01-00037A',
-              partDesc: 'R CHIP',
-              partSpec: '10KΩ,5%,1/16W',
-              status: '부품 등록',
-              createDate: '2022-08-13',
-            },
-            {
-              id: 2,
-              partNo: 'RC01-00036A',
-              partDesc: 'R CHIP',
-              partSpec: '1MΩ,5%,1/16W',
-              status: '부품 등록',
-              createDate: '2022-08-13',
-            },
-            {
-              id: 3,
-              partNo: 'TP04-00011A',
-              partDesc: 'THERMISTOR PTC',
-              partSpec: '15ohm,20%,20Vac,1.6A,0.14A,TP',
-              status: '부품 등록',
-              createDate: '2022-08-13',
-            },
-            {
-              id: 4,
-              partNo: 'CH01-00183A',
-              partDesc: 'CONNECTOR HEADER',
-              partSpec: '1WALL,9P,1R,3.96MM,STRAIGHT,SN,WHT',
-              status: 'Library 등록',
-              createDate: '2022-08-12',
-            },
-            {
-              id: 5,
-              partNo: 'CE01-10021A',
-              partDesc: 'C CERAMIC,CHIP',
-              partSpec: '0.0015NF,0.1PF,50V,C0G,TP,1608',
-              status: 'Library 등록',
-              createDate: '2022-08-11',
-            },
-          ],
-          2: [
-            {
-              id: 1,
-              productType: 'TV',
-              product: 'QXST101101',
-              boardType: 'MAIN',
-              pbaNo: 'PB01-00129A',
-              pcbNo: 'PC01-00103A',
-              status: '회로설계',
-            },
-            {
-              id: 2,
-              productType: 'TV',
-              product: 'QXST101101',
-              boardType: 'Control',
-              pbaNo: 'PB01-00128A',
-              pcbNo: 'PC01-00102A',
-              status: '회로설계',
-            },
-            {
-              id: 3,
-              productType: 'Monitor',
-              product: 'ATM101101',
-              boardType: 'MAIN',
-              pbaNo: 'PB01-00107A',
-              pcbNo: 'PC01-00098A',
-              status: 'PCB설계승인',
-            },
-            {
-              id: 4,
-              productType: 'TV',
-              product: 'QGAU002610',
-              boardType: 'Power',
-              pbaNo: 'PB01-00059A',
-              pcbNo: 'PC01-00065A',
-              status: 'PCB설계',
-            },
-            {
-              id: 5,
-              productType: 'TV',
-              product: 'QXST101097',
-              boardType: 'Control',
-              pbaNo: 'PB01-00099A',
-              pcbNo: 'PC01-00088A',
-              status: 'PCB설계',
-            },
-          ],
-        },
-        list: {
-          0: false,
-          1: false,
-          2: false,
+          names: ['시험 성적서', '요구사항 명세', 'PCB 제작요청\\\\\\\\', '회로설계검증', '기구설계검증', '도면배포', '신뢰성 시험 의뢰', 'Sample 발주', '[회의]회로DR', '[회의]품평회 진행'],
         },
       }
     },

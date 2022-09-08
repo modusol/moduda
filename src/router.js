@@ -56,11 +56,23 @@ export default new Router({
           path: 'upgrade',
           component: () => import('@/views/dashboard/Upgrade'),
         },
-         // UnitDashboard
-         {
+        // UnitDashboard
+        {
           name: 'Unit Dashboard',
           path: 'unit/unit-dashboard',
           component: () => import('@/views/unit/UnitDashboard'),
+        },
+        // UnitMyWork
+        {
+          name: 'Unit Dashboard',
+          path: 'unit/unit-card-work',
+          component: () => import('@/views/unit/UnitCardMyWork'),
+        },
+         // UnitMyWork
+         {
+          name: 'Unit Search',
+          path: 'unit/unit-list-search',
+          component: () => import('@/views/unit/UnitListSearch'),
         },
       ],
     },

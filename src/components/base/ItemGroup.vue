@@ -1,12 +1,12 @@
 <template>
   <v-list-group
-    :group="group"
+    :group="item.group"
     :prepend-icon="item.icon"
     :sub-group="subGroup"
     append-icon="mdi-menu-down"
     :color="barColor !== 'rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.7)' ? 'white' : 'grey darken-1'"
     :style="level !== 0 ? 'padding-left:' + (30*level) + 'px' : ''"
-    :value="this.$router.getRoutes == item.to ? 'true' : 'false'"
+    :value="this.$route.path && this.$route.path === item.to ? true : false"
     @click="clickGroup(item)"
   >
     <template v-slot:activator>
@@ -52,7 +52,7 @@
 
 <script>
   // Utilities
-  import kebabCase from 'lodash/kebabCase'
+  // import kebabCase from 'lodash/kebabCase'
   import { mapState } from 'vuex'
 
   export default {
@@ -89,7 +89,7 @@
       children () {
         return this.item.children.map(item => ({
           ...item,
-          to: !item.to ? undefined : `${this.item.group}/${item.to}`,
+          to: !item.to ? undefined : `/${this.item.group}/${item.to}`,
         }))
       },
       computedText () {
@@ -103,9 +103,9 @@
 
         return text
       },
-      group () {
-        return this.genGroup(this.item.children)
-      },
+      // group () {
+      //   return this.genGroup(this.item.children)
+      // },
       computedLevel () {
         let rtnLevel = 0
         rtnLevel = this.level + 1
@@ -114,20 +114,21 @@
     },
 
     methods: {
-      genGroup (children) {
-        return children
-          .filter(item => item.to)
-          .map(item => {
-            const parent = item.group || this.item.group
-            let group = `${parent}/${kebabCase(item.to)}`
+      // genGroup (children) {
+      //   return children
+      //     .filter(item => item.to)
+      //     .map(item => {
+      //       const parent = item.group || this.item.group
+      //       // console.log("parent : " ,parent)
+      //       // let group = `${parent}/${kebabCase(item.to)}`
 
-            if (item.children) {
-              group = `${group}|${this.genGroup(item.children)}`
-            }
-
-            return group
-          }).join('|')
-      },
+      //       // if (item.children) {
+      //       //   group = `${group}|${this.genGroup(item.children)}`
+      //       // }
+      //       // console.log(group)
+      //       return parent
+      //     }).join('|')
+      // },
       clickGroup (item) {
         if (item.children && item.to) {
           this.$router.push(item.to)
