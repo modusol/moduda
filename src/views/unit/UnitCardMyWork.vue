@@ -152,16 +152,16 @@
         tab: 'worktodo',
         works: [
           {
-            title: 'System 구상 설계',
+            title: '사업계획서',
             period: '22.08.25 ~ 23.01.15',
             subtitle: '2023 OLED 주력상품',
             tags: [
               {
-                title: 'DGU-8650-PRIMA',
+                title: 'QXST101101',
                 color: 'green',
               },
               {
-                title: 'G3',
+                title: 'PCA',
                 color: 'pink',
               },
             ],

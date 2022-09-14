@@ -69,10 +69,28 @@ export default new Router({
           component: () => import('@/views/unit/UnitCardMyWork'),
         },
          // UnitMyWork
-         {
+        {
           name: 'Unit Search',
           path: 'unit/unit-list-search',
           component: () => import('@/views/unit/UnitListSearch'),
+        },
+        // ready
+        {
+          name: 'Ready',
+          path: 'ready',
+          component: () => import('@/views/Ready'),
+        },
+        // ready
+        {
+          name: 'Ready',
+          path: 'ready2',
+          component: () => import('@/views/Ready'),
+        },
+        // ready
+        {
+          name: 'Ready',
+          path: 'ready3',
+          component: () => import('@/views/Ready'),
         },
       ],
     },

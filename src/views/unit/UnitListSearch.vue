@@ -6,12 +6,21 @@
   >
     <v-tabs
       v-model="tab"
+      value="search"
       background-color="transparent"
+      slider-color="blue"
     >
-      <v-tab
+      <!-- <v-tab
         key="worktodo"
+        href="#unit-card-work"
       >
         Work To Do
+      </v-tab> -->
+      <v-tab
+        key="search"
+        href="#search"
+      >
+        search
       </v-tab>
     </v-tabs>
     <v-tabs-items
@@ -19,6 +28,11 @@
     >
       <v-tab-item
         key="worktodo"
+      >
+      </v-tab-item>
+      <v-tab-item
+        key="search"
+        value="search"
       >
         <!-- Filter Headr -->
         <v-toolbar
@@ -54,153 +68,144 @@
           >
           </v-text-field>
         </v-toolbar>
-        <v-row
-          align="center"
+       
+        <tree-table
+          :value="units"
+          :paginator="true"
+          :rows="10"
+          :resizable-columns="true"
+          column-resize-mode="expand"
+          indentation="0.5"
         >
-          <v-col
-            v-for="work in works"
-            :key="work"
-            cols="12"
-            sm="6"
-            lg="3"
-          >
-            <v-card
-              elevation="2"
-              outlined
-              class="mx-3"
-            >
-              <v-toolbar
-              flat
-              dense
-              class="toolbar-pr-0"
-              >
-                <template slot="default">
-                  <v-chip
-                    v-for="tag in work.tags"
-                    :key="tag"
-                    class="mr-2"
-                    :color="tag.color"
-                    x-small
-                    dark
-                    link
-                  >
-                    {{ tag.title }}
-                  </v-chip>                
-                  <v-spacer></v-spacer>
-                  <v-btn
-                    icon
-                    small
-                  >
-                  <v-icon 
-                    :color="work.favorite? 'yellow' : ''">mdi-star</v-icon> 
-                  </v-btn>
-                  <v-btn
-                    icon
-                    small
-                  >
-                    <v-icon>mdi-dots-vertical</v-icon>
-                  </v-btn>
-                </template>
-              </v-toolbar>
-                <v-card-title class="pt-1 pb-0">{{work.title}}</v-card-title>
-                <v-card-text class="pa-0">
-                  <v-list-item two-line>
-                    <v-list-item-content>                    
-                      <v-list-item-subtitle class="pr-3 pb-2 text--secondary text-right">{{work.period}}</v-list-item-subtitle>
-                      <v-list-item-subtitle class="text--primary pl-1">{{work.subtitle}}</v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-card-text>
-                <v-card-actions>
-                  <v-list-item class="grow align-end">
-                    <v-list-item-content>
-                      <v-list-item-title>
-                        <v-icon class="mr-1">
-                          mdi-application-edit-outline
-                        </v-icon>
-                        <span class="subheading mr-2">{{work.taskCnt}}</span>
-                        <v-icon class="mr-1">
-                          mdi-message-text-outline
-                        </v-icon>
-                        <span class="subheading mr-2">{{work.talkCnt}}</span>
-                      </v-list-item-title>
-                    </v-list-item-content>          
-                    <v-row
-                      align="center"
-                      justify="end"
-                    >
-                      <v-icon class="mr-1">
-                        mdi-account
-                      </v-icon>
-                      <span class="subheading">{{work.userCnt}}</span>
-                    </v-row>
-                  </v-list-item>
-              </v-card-actions>
-            </v-card>
-          </v-col>
-        </v-row>
+            <column header-style="width: 30%" header-class="sm-invisible" field="name" header="Unit Name" :expander="true"></column>
+            <column header-style="width: 30%" field="desc" header="Description"></column>
+            <column header-style="width: 5%" field="type" header="Type" body-style="text-align: center"></column>
+            <column header-style="width: 5%" field="status" header="상태" body-style="text-align: center">
+              <template #body="slotProps">
+                <span :class="slotProps.node.data.cssClass">
+                  {{slotProps.node.data.status}}
+                </span>
+              </template>
+            </column>
+            <column header-style="width: 10%" field="planDate" header="일정"></column>
+            <column header-style="width: 19%" field="regDate" header="등록일" body-style="text-align: center"></column>
+            <column header-style="width: 1%" field="manager" header="담당자" body-style="text-align: center"></column>
+        </tree-table>
       </v-tab-item>
-    </v-tabs-items>      
+    </v-tabs-items>
   </v-container>
 </template>
 
 <script>
+  import TreeTable from 'primevue/treetable';
+  import Column from 'primevue/column';
+  import 'primevue/resources/primevue.min.css';
+  import 'primevue/resources/themes/saga-blue/theme.css';
+  import 'primeicons/primeicons.css';
+  import '@/sass/treetable.sass'
+
   export default {
-    name: 'UnitCardMyWork',
+    name: 'UnitListSearchMyWork',
+    components: {
+      TreeTable,
+      Column,
+    },
     data () {
       return {
-        tab: 'worktodo',
-        works: [
+        tab: 'search',
+        page: 0,
+        filter: '',
+        units: [
           {
-            title: 'System 구상 설계',
-            period: '22.08.25 ~ 23.01.15',
-            subtitle: '2023 OLED 주력상품',
-            tags: [
+            "key":"0",
+            "data":{
+              "name":"QXST101101","desc":"Project Description","type":"Project","status":"진행중","planDate":"2022.08-25 ~ 2023.01.15","regDate":"2022.08.25","manager":"임꺽정","cssClass":"blue--text"
+            },
+            "children":[
               {
-                title: 'DGU-8650-PRIMA',
-                color: 'green',
+                "key":"0-0",
+                "data":{
+                  "name":"PCA","desc":"단계 Description","type":"단계","status":"완료","planDate":"2022.08-25 ~ 2023.09.15","regDate":"2022.08.25","manager":"홍길동","cssClass":"grey--text"
+                },
+                "children":[
+                  {
+                    "key":"0-0-1",
+                    "data":{
+                      "name":"사업계획서","desc":"","type":"Task","status":"완료","planDate":"2022.08-25 ~ 2023.09.15","regDate":"2022.08.25","manager":"강사업","cssClass":"grey--text"
+                    },
+                  },
+                  {
+                    "key":"0-0-1",
+                    "data":{
+                      "name":"시장조사","desc":"","type":"Task","status":"완료","planDate":"2022.08-27 ~ 2023.09.03","regDate":"2022.08.25","manager":"김시장","cssClass":"grey--text"
+                    },
+                  },                  
+                ]
               },
-              {
-                title: 'G3',
-                color: 'pink',
-              },
-            ],
-            taskCnt: 12,
-            talkCnt: 20,
-            userCnt: 17,
-            favorite: true,
+            ]
           },
           {
-            title: '주간 업무 보고',
-            period: '22.01.03 ~ 22.12.31',
-            subtitle: '2022년도 개발1팀 주간업무보고',
-            tags: [
+            "key":"1",
+            "data":{
+              "name":"QXST101096","desc":"Project Description","type":"Project","status":"진행중","planDate":"2021.12-25 ~ 2023.12.15","regDate":"2021.12.23","manager":"임꺽정","cssClass":"blue--text"
+            },
+            "children":[
               {
-                title: '개발 1팀',
-                color: 'green',
+                "key":"1-0",
+                "data":{
+                  "name":"DVR","desc":"단계 Description","type":"단계","status":"완료","planDate":"2021.12-25 ~ 2022.02.13","regDate":"2021.12.23","manager":"홍길동","cssClass":"grey--text"
+                },
+                "children":[
+                  {
+                    "key":"1-0-1",
+                    "data":{
+                      "name":"회로검증","desc":"","type":"Task","status":"완료","planDate":"2021.12-25 ~ 2022.01.09","regDate":"2021.12.23","manager":"강회로","cssClass":"grey--text"
+                    },
+                  },
+                  {
+                    "key":"1-0-2",
+                    "data":{
+                      "name":"PCB검증","desc":"","type":"Task","status":"완료","planDate":"2022.01.12 ~ 2022.01.28","regDate":"2021.12.23","manager":"최아트","cssClass":"grey--text"
+                    },
+                  },                  
+                ]
               },
               {
-                title: '22` 업무 보고',
-                color: 'pink',
+                "key":"1-1",
+                "data":{
+                  "name":"PVR","desc":"단계 Description","type":"단계","status":"완료","planDate":"2022.02.14 ~ 2022.09.13","regDate":"2021.12.23","manager":"홍길동","cssClass":"grey--text"
+                },
+                "children":[
+                  {
+                    "key":"1-1-1",
+                    "data":{
+                      "name":"제품검증","desc":"","type":"Task","status":"완료","planDate":"2022.02.14 ~ 2022.01.09","regDate":"2021.12.23","manager":"강회로","cssClass":"grey--text"
+                    },
+                  },            
+                ]
               },
-            ],
-            taskCnt: 1,
-            talkCnt: 4,
-            userCnt: 10,
-            favorite: true,
-          },
-          {
-            title: '[임시]2025 OLED 신규모델',
-            period: '22.01.03 ~ 22.12.31',
-            subtitle: '2025년도 신규모델 선행 개발',
-            tags: [
-            ],
-            taskCnt: 3,
-            talkCnt: 1,
-            userCnt: 14,
+            ]
           },
         ],
       }
+    },
+    computed: {
+      headers () {
+        return [
+          {field: 'name', header: 'Unit Name', expander: true},
+          {field: 'size', header: 'Size'},
+          {field: 'type', header: 'Type'}
+        ]
+      },
+    },
+    methods: {
+        filterChanged (filter) {
+            this.filter = filter;
+        },
+        
+        pageChanged (page) {
+            this.page = page;
+        },
     },
   }
 </script>

@@ -17,6 +17,8 @@
     "chart.js": "^3.9.1",
     "chartist-plugin-legend": "^0.6.2",
     "core-js": "^3.6.2",
+    "primeicons": "^5.0.0",
+    "primevue": "^2.9.2",
     "vue": "^2.6.11",
     "vue-chartjs": "^4.1.1",
     "vue-i18n": "^8.15.3",
